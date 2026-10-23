@@ -32,9 +32,10 @@ const canvas = muze
 // =============================================================================
 // PART 2: send clicks to the host app (copy this part into any Muze chart)
 // =============================================================================
-// Origin of the web app that embeds ThoughtSpot. The browser drops the message
-// if the top-level page has any other origin.
-const HOST_ORIGIN = "http://localhost:8080";
+// Origins of the web apps that embed this chart (here: local dev and the GitHub
+// Pages demo). The browser delivers the message only to a top-level page whose
+// origin is in this list, and silently drops the rest.
+const HOST_ORIGINS = ["http://localhost:8080", "https://alexeski.github.io"];
 
 const { SurrogateSideEffect } = muze.SideEffects.standards;
 const { VolatileBehaviour } = muze.Behaviours.standards;
@@ -65,15 +66,15 @@ class SendClickToHost extends SurrogateSideEffect {
     });
     const row = Object.fromEntries(fields.map((f, i) => [f.name, rows[0][i]]));
 
-    window.top.postMessage(
-      {
-        type: "muze-mark-click",
-        version: 1,
-        row,
-        fields: fields.map(({ name, type, subtype }) => ({ name, type, subtype })),
-      },
-      HOST_ORIGIN,
-    );
+    const message = {
+      type: "muze-mark-click",
+      version: 1,
+      row,
+      fields: fields.map(({ name, type, subtype }) => ({ name, type, subtype })),
+    };
+    for (const origin of HOST_ORIGINS) {
+      window.top.postMessage(message, origin);
+    }
     return this;
   }
 }

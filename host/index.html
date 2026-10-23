@@ -434,7 +434,7 @@
       {
         title: "The Muze chart sends the click",
         text: "Code inside the chart sends the clicked bar's data up to this page.",
-        code: 'window.top.postMessage({ type: "muze-mark-click", row }, HOST_ORIGIN)',
+        code: 'window.top.postMessage({ type: "muze-mark-click", row }, origin)',
         file: "muze/chart.js, part 2",
       },
       {

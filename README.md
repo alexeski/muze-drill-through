@@ -4,6 +4,9 @@ A user clicks a bar in an embedded Muze Studio chart. An actions menu opens over
 picking **View detail for region = West** replaces the chart with a second embedded chart filtered
 to `region = West`.
 
+**Live page:** https://alexeski.github.io/muze-drill-through/ (add your IDs as query parameters,
+see [Use the GitHub Pages demo](#use-the-github-pages-demo)).
+
 ## How it works
 
 ```
@@ -47,7 +50,7 @@ actually exchanged.
 
 1. **Clickable chart.** Create an Answer, e.g. `Total sales region`. Switch it to a Muze Studio
    chart and paste `chart.js`, `chart.html` and `chart.css` into the JS, HTML and CSS tabs. Set
-   `HOST_ORIGIN` in `chart.js` to your web app's origin. Save, then pin it to a Liveboard.
+   `HOST_ORIGINS` in `chart.js` to your web app's origin(s). Save, then pin it to a Liveboard.
 2. **Detail chart.** Create a second Answer on the same model, e.g. `Total sales state`. It doesn't
    need the `region` column. Paste `detail-chart.js` and the same HTML/CSS, then pin it.
 3. **ThoughtSpot security settings** (Develop → Security settings). Add your web app's origin
@@ -63,6 +66,20 @@ actually exchanged.
 
 To get the IDs, open a pinned chart's **⋯** menu in the Liveboard and choose **Copy link**. The
 link ends with `/pinboard/<liveboard-guid>/<viz-guid>`.
+
+## Use the GitHub Pages demo
+
+The same page is published at https://alexeski.github.io/muze-drill-through/. To point it at your
+ThoughtSpot instance:
+
+1. In ThoughtSpot, Develop → Security settings, add `https://alexeski.github.io` to the CSP
+   visual-embed hosts and to the CORS allowlist.
+2. Make sure `https://alexeski.github.io` is in `HOST_ORIGINS` in the chart's Muze Studio code (it
+   is in `muze/chart.js`), and save the Answer.
+3. Sign in to ThoughtSpot in the same browser, then open
+   `https://alexeski.github.io/muze-drill-through/?tsHost=https://<you>.thoughtspot.cloud&liveboardId=<lb-guid>&vizId=<chart-viz-guid>&detailVizId=<detail-viz-guid>`.
+
+The IDs travel only in the link you open; nothing about your instance is stored in the repo.
 
 ## Gotchas
 
