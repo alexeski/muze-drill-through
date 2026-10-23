@@ -30,6 +30,22 @@
     }
     header h1 { margin: 0; font-size: 16px; }
     header p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .poc-note {
+      flex: none;
+      padding: 4px 10px;
+      border: 1px solid var(--warn);
+      border-radius: 999px;
+      color: var(--warn);
+      font-size: 12px;
+      text-decoration: none;
+    }
+    .poc-note:hover { text-decoration: underline; }
     main {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 380px;
@@ -204,8 +220,13 @@
 </head>
 <body>
   <header>
-    <h1>Muze Studio drill-through demo</h1>
-    <p>Click a bar, pick an action from the menu, and the page swaps in a second chart filtered by that bar.</p>
+    <div>
+      <h1>Muze Studio drill-through demo</h1>
+      <p>Click a bar, pick an action from the menu, and the page swaps in a second chart filtered by that bar.</p>
+    </div>
+    <a class="poc-note" href="https://github.com/alexeski/muze-drill-through#disclaimer" target="_blank" rel="noopener">
+      Proof of concept · not supported by ThoughtSpot Support
+    </a>
   </header>
   <main>
     <div class="chart-column">

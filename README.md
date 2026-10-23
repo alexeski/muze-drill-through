@@ -1,5 +1,9 @@
 # Muze Studio drill-through demo
 
+> [!IMPORTANT]
+> **Proof of concept: not a supported ThoughtSpot feature.** This is a teaching example, provided
+> as is. Please don't contact ThoughtSpot Support about this code. See [Disclaimer](#disclaimer).
+
 A user clicks a bar in an embedded Muze Studio chart. An actions menu opens over the chart, and
 picking **View detail for region = West** replaces the chart with a second embedded chart filtered
 to `region = West`.
@@ -94,3 +98,21 @@ The IDs travel only in the link you open; nothing about your instance is stored 
   third-party cookies; use trusted authentication (`AuthType.TrustedAuthTokenCookieless`).
 - The click hand-off (`postMessage` from the Muze frame) isn't a documented ThoughtSpot
   integration, so re-test it after ThoughtSpot upgrades.
+
+## Disclaimer
+
+This repository is a proof of concept, shared to show one way to connect a Muze Studio chart to
+the web app that embeds it. It is a learning aid, not a product.
+
+- **Not supported.** It isn't a ThoughtSpot product or feature, and it isn't covered by any
+  ThoughtSpot support agreement, SLA or warranty. ThoughtSpot Support can't help with this code,
+  so please don't open support cases about it. For questions about the approach, talk to your
+  ThoughtSpot account team.
+- **Provided as is.** The code comes without warranty of any kind, express or implied, including
+  fitness for a particular purpose. You use it at your own risk.
+- **Not maintained.** There's no commitment to update it, fix issues or keep it compatible with
+  future ThoughtSpot releases.
+- **Relies on undocumented behaviour.** The click hand-off from the Muze Studio frame isn't a
+  documented integration and may stop working in any release without notice.
+- **Yours to own.** If you build on it, you're responsible for reviewing, testing, securing and
+  maintaining the result in your own application.
