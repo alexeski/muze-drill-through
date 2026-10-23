@@ -1,0 +1,210 @@
+/* Page layout */
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --text: #1d2330;
+  --muted: #6b7280;
+  --border: #e3e6eb;
+  --accent: #2359d1;
+  --accent-soft: #eaf0fc;
+  --code-bg: #f3f4f6;
+  --warn: #b45309;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+header h1 { margin: 0; font-size: 16px; }
+header p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.poc-note {
+  flex: none;
+  padding: 4px 10px;
+  border: 1px solid var(--warn);
+  border-radius: 999px;
+  color: var(--warn);
+  font-size: 12px;
+  text-decoration: none;
+}
+.poc-note:hover { text-decoration: underline; }
+main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 16px;
+  padding: 16px;
+  height: calc(100vh - 62px);
+}
+.chart-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+/* Breadcrumb above the chart */
+nav.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+}
+nav.crumbs button {
+  border: 0;
+  background: none;
+  color: var(--accent);
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+nav.crumbs .sep { color: var(--muted); }
+nav.crumbs .current { font-weight: 600; }
+
+/* The embedded ThoughtSpot charts */
+#stage {
+  position: relative;
+  flex: 1;
+  min-height: 420px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.embed { position: absolute; inset: 0; }
+.embed[hidden] { display: none; }
+
+/* The actions menu, laid over the chart's top-right corner */
+.action-menu {
+  position: absolute;
+  top: 44px; /* below the ThoughtSpot tile header */
+  right: 12px;
+  z-index: 2;
+  width: 280px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(16, 24, 40, .14);
+  font-size: 13px;
+  overflow: hidden;
+}
+.action-menu[hidden] { display: none; }
+.menu-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.menu-head dl {
+  flex: 1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 10px;
+  margin: 0;
+}
+.menu-head dt { color: var(--muted); }
+.menu-head dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.menu-close {
+  border: 0;
+  background: none;
+  padding: 0 2px;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+}
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+.menu-item:hover, .menu-item:focus-visible { background: var(--accent-soft); outline: none; }
+.menu-item:disabled { color: var(--muted); background: none; cursor: default; }
+.menu-item .icon { color: var(--accent); }
+
+/* "How it works" panel */
+aside {
+  overflow: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px;
+}
+aside h2 { margin: 0 0 4px; font-size: 15px; }
+aside > p { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.step {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 0 10px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: border-color .2s, background .2s;
+}
+.step.done { border-color: var(--accent); background: var(--accent-soft); }
+.step .num {
+  grid-row: span 4;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--border);
+  color: var(--muted);
+}
+.step.done .num { background: var(--accent); color: #fff; }
+.step h3 { margin: 2px 0 2px; font-size: 14px; }
+.step p { margin: 0 0 6px; font-size: 13px; color: var(--muted); }
+.step code, .step pre {
+  font: 12px/1.4 ui-monospace, Menlo, monospace;
+  background: var(--code-bg);
+  border-radius: 4px;
+}
+.step code { display: block; padding: 4px 6px; overflow-wrap: anywhere; }
+.step .file { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+.step pre {
+  margin: 6px 0 0;
+  padding: 6px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: var(--panel);
+  border: 1px dashed var(--accent);
+}
+.step pre:empty { display: none; }
+.warn { color: var(--warn); }
+.setup-note {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 24px;
+  text-align: center;
+  color: var(--warn);
+}
+
+@media (max-width: 900px) {
+  main { grid-template-columns: 1fr; height: auto; }
+  #stage { height: 480px; flex: none; }
+}

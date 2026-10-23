@@ -48,7 +48,9 @@ actually exchanged.
 | `muze/chart.js` | The clickable chart. Part 1 draws it; part 2 sends clicks to the host and can be copied into any Muze chart. |
 | `muze/detail-chart.js` | The drill target. A plain Muze chart with nothing special; any chart works. |
 | `muze/chart.html`, `muze/chart.css` | HTML and CSS tabs for both charts. |
-| `host/index.html` | The host page. Its code is split into steps 0–4 that match the list above. |
+| `host/drill-through.js` | **The solution.** Config at the top, then steps 0–4 matching the list above. Start here. |
+| `host/how-it-works.js` | Demo only: the "How it works" panel. It listens to the `drill:*` events the solution reports; delete it and the `report()` calls when you reuse the code. |
+| `host/index.html`, `host/styles.css` | The page markup and styles. |
 
 ## Set it up
 
